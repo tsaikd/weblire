@@ -1,0 +1,22 @@
+/** add to build.gradle
+apply from: 'gradle/eclipse-jar.gradle'
+buildscript {
+	apply from: 'gradle/eclipse-jar-buildscript.gradle'
+}
+ */
+
+apply plugin: 'eclipse'
+
+eclipse {
+	classpath {
+		downloadSources = true
+		downloadJavadoc = true
+	}
+}
+
+configure(allprojects) {
+	apply plugin: 'propdeps'
+	apply plugin: 'propdeps-maven'
+	apply plugin: 'propdeps-idea'
+	apply plugin: 'propdeps-eclipse'
+}

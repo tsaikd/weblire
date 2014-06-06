@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply from: 'gradle/maven.gradle'
+apply from: 'gradle/eclipse-war.gradle'
+
+group = 'org.tsaikd.java'
+version = '0.9.4-beta1' + (hasProperty('release') ? "" : "-SNAPSHOT")
+
+sourceCompatibility = '1.7'
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+repositories {
+	mavenCentral()
+}
+
+List log = [
+	'commons-logging:commons-logging:+',
+	'org.slf4j:slf4j-log4j12:+'
+]
+
+dependencies {
+	compile 'com.github.kzwang:lire:0.9.4-kzwang-beta1'
+	compile 'commons-codec:commons-codec:+'
+	compile 'commons-lang:commons-lang:+'
+	compile 'commons-io:commons-io:+'
+	compile 'org.mongodb:mongo-java-driver:+'
+	providedCompile 'javax.servlet:javax.servlet-api:+'
+	testCompile 'junit:junit:+'
+	compile log
+}
+
+war {
+	if (version.contains('SNAPSHOT')) {
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd-HHmm")
+		classifier = dateFormat.format(Calendar.getInstance().getTime())
+	}
+}
+
+test {
+	testLogging.showStandardStreams = true
+}

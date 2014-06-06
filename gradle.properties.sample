@@ -1,0 +1,8 @@
+mavenSnapshotUrl = http://localhost:8080/nexus-2.6.4-02/content/repositories/snapshots
+mavenReleaseUrl = http://localhost:8080/nexus-2.6.4-02/content/repositories/releases
+mavenDeployUser =
+mavenDeployPass =
+tomcatHost = localhost
+tomcatPort = 8080
+tomcatUser =
+tomcatPass =

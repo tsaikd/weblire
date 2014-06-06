@@ -1,0 +1,18 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+eclipse {
+	classpath {
+		downloadSources = true
+		downloadJavadoc = true
+	}
+
+	wtp {
+		facet {
+			facet name: 'java', version: sourceCompatibility
+			facet name: 'jst.web', version: '3.0'
+			facet name: 'wst.jsdt.web', version: '1.0'
+		}
+	}
+}

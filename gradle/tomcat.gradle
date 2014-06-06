@@ -1,0 +1,36 @@
+/** define the following properties in gradle.properties
+tomcatHost
+tomcatPort
+tomcatUser
+tomcatPass
+ **/
+/** add to build.gradle
+apply from: 'gradle/tomcat.gradle'
+buildscript {
+	apply from: 'gradle/tomcat-buildscript.gradle'
+}
+ */
+
+apply plugin: 'cargo'
+
+cargo {
+	containerId = 'tomcat7x'
+	remote {
+		try {
+			hostname = tomcatHost
+		} catch (MissingPropertyExceptionmpe) {}
+		try {
+			port = Integer.parseInt(tomcatPort)
+		} catch (MissingPropertyExceptionmpe) {}
+		try {
+			username = tomcatUser
+		} catch (MissingPropertyExceptionmpe) {}
+		try {
+			password = tomcatPass
+		} catch (MissingPropertyExceptionmpe) {}
+	}
+}
+
+dependencies {
+	cargo 'org.codehaus.cargo:cargo-ant:+'
+}
